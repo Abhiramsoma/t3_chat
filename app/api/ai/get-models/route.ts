@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 
+import { NextRequest, NextResponse } from "next/server";
 
 type OpenRouterModel = {
   id: string;
@@ -18,6 +18,7 @@ type OpenRouterModel = {
     [key: string]: unknown;
   };
 };
+
 export async function GET(request: NextRequest) {
   try {
     const response = await fetch("https://openrouter.ai/api/v1/models", {
@@ -37,22 +38,28 @@ export async function GET(request: NextRequest) {
 
     const data: { data: OpenRouterModel[] } = await response.json();
 
-    const freeModels = data.data.filter((model) => {
-      const promptPrice = parseFloat(model.pricing?.prompt || "0");
-      const completionPrice = parseFloat(model.pricing?.completion || "0");
+    const freeModels = data.data.filter(
+      (model: OpenRouterModel) => {
+        const promptPrice = parseFloat(model.pricing?.prompt || "0");
+        const completionPrice = parseFloat(
+          model.pricing?.completion || "0",
+        );
 
-      return promptPrice === 0 && completionPrice === 0;
-    });
+        return promptPrice === 0 && completionPrice === 0;
+      },
+    );
 
-    const formattedModels = freeModels.map((model) => ({
-      id: model.id,
-      name: model.name,
-      description: model.description,
-      context_length: model.context_length,
-      architecture: model.architecture,
-      pricing: model.pricing,
-      top_provider: model.top_provider,
-    }));
+    const formattedModels = freeModels.map(
+      (model: OpenRouterModel) => ({
+        id: model.id,
+        name: model.name,
+        description: model.description,
+        context_length: model.context_length,
+        architecture: model.architecture,
+        pricing: model.pricing,
+        top_provider: model.top_provider,
+      }),
+    );
 
     return NextResponse.json({
       models: formattedModels,
@@ -63,7 +70,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: (error as Error).message || "Failed to fetch free models",
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch free models",
       },
       { status: 500 },
     );
