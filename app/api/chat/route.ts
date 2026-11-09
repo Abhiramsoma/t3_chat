@@ -9,11 +9,16 @@ import { NextRequest } from "next/server";
 const openRouter = createOpenRouter({
   apiKey: process.env.OPENROUTER_API_KEY!,
 });
-
+type DBMessage = {
+  id: string;
+  content: string;
+  messageRole: MessageRole;
+  createdAt: Date;
+};
 /**
  * Convert DB message to UI format for AI SDK
  */
-function dbMessageToUI(msg) {
+function dbMessageToUI(msg: DBMessage) {
   try {
     const parts = JSON.parse(msg.content);
     const textParts = parts.filter((p) => p.type === "text");
