@@ -1,5 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# T3 Chat
 
+**One platform. Multiple AI models. One place for every conversation.**
+
+T3 Chat is a multi-model AI chat platform that brings different AI models together in a single interface. Instead of switching between platforms to explore and use different models, users can discover models, compare their capabilities, and choose the one that best fits their needs.
+
+Powered by OpenRouter, the platform offers a searchable model catalogue with details such as context length, supported modalities, pricing, and provider information. Users can interact with their selected models through streaming responses, manage multiple conversations, and return to their saved chat history whenever they want.
+
+### Key Features
+
+- **Multi-Model Access:** Explore and interact with multiple AI models from one platform.
+- **Model Discovery:** Search and explore available models, including free options.
+- **Model Information:** View context limits, supported modalities, pricing, and provider details before selecting a model.
+- **Streaming Responses:** See AI responses as they are generated.
+- **Conversation Management:** Create separate chats and revisit previous conversations.
+- **Persistent Chat History:** Save conversations and messages to a database.
+- **Authentication:** Sign in using GitHub to access user-specific conversations.
+
+**Live Demo:** https://t3chat-one.vercel.app/  
+**Source Code:** https://github.com/Abhiramsoma/t3_chat
 ## Getting Started
 
 First, run the development server:
